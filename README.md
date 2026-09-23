@@ -56,7 +56,7 @@ ReciMeProjectApp
 ### Dependency injection
 
 - `AppDependencies` is the single composition root
-- Feature coordinators receive **narrow protocols** (`LoginDependencies`, `HomeTabDependencies`) so Login cannot access recipe services
+- Feature coordinators receive **narrow protocols** via named slices, e.g. `appDependencies.login`, `appDependencies.recipeList`, `appDependencies.favorites`
 - Services are **`lazy`** — created on first use (auth at login; recipes/favorites after login)
 
 ### Data flow
