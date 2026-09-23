@@ -65,3 +65,24 @@ struct RecipeListFlowView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Recipe List Flow") {
+    RecipeListFlowPreviewHost()
+}
+
+private struct RecipeListFlowPreviewHost: View {
+    @StateObject private var coordinator: RecipeListCoordinator
+    
+    init() {
+        let deps = PreviewSupport.makeAppDependencies()
+        let coordinator = RecipeListCoordinator(dependencies: deps.recipeList)
+        coordinator.start()
+        _coordinator = StateObject(wrappedValue: coordinator)
+    }
+    
+    var body: some View {
+        RecipeListFlowView(coordinator: coordinator)
+    }
+}
+#endif

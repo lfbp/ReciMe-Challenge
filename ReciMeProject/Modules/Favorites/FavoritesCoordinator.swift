@@ -65,3 +65,24 @@ struct FavoritesFlowView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Favorites Flow") {
+    FavoritesFlowPreviewHost()
+}
+
+private struct FavoritesFlowPreviewHost: View {
+    @StateObject private var coordinator: FavoritesCoordinator
+    
+    init() {
+        let deps = PreviewSupport.makeAppDependencies()
+        let coordinator = FavoritesCoordinator(dependencies: deps.favorites)
+        coordinator.start()
+        _coordinator = StateObject(wrappedValue: coordinator)
+    }
+    
+    var body: some View {
+        FavoritesFlowView(coordinator: coordinator)
+    }
+}
+#endif

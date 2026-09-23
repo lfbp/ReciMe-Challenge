@@ -136,3 +136,30 @@ struct RecipeFilterSheet: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Filter Sheet") {
+    RecipeFilterSheet(
+        filter: .constant(RecipeFilter()),
+        availableCuisines: ["Italian", "Mexican", "Japanese", "American"],
+        onApply: {},
+        onReset: {}
+    )
+}
+
+#Preview("Filter Sheet — Active") {
+    var filter = RecipeFilter()
+    filter.dietaryAttributes = [.vegetarian, .glutenFree]
+    filter.difficulty = .easy
+    filter.cuisine = "Italian"
+    filter.servings = 2
+    filter.maxPrepTime = 30
+    
+    return RecipeFilterSheet(
+        filter: .constant(filter),
+        availableCuisines: ["Italian", "Mexican", "Japanese"],
+        onApply: {},
+        onReset: {}
+    )
+}
+#endif

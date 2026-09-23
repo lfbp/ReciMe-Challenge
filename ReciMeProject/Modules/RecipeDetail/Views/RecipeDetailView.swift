@@ -108,3 +108,24 @@ struct RecipeDetailView: View {
         .background(ColorTokens.background)
     }
 }
+
+#if DEBUG
+#Preview("Recipe Detail") {
+    NavigationStack {
+        RecipeDetailView(viewModel: PreviewSupport.makeRecipeDetailViewModel())
+    }
+}
+
+#Preview("Recipe Detail — Favorited") {
+    let favoritesService = FavoritesService()
+    favoritesService.toggleFavorite(Recipe.preview.id)
+    
+    return NavigationStack {
+        RecipeDetailView(
+            viewModel: PreviewSupport.makeRecipeDetailViewModel(
+                favoritesService: favoritesService
+            )
+        )
+    }
+}
+#endif

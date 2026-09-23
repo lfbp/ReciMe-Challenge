@@ -82,12 +82,16 @@ struct LoginView: View {
     }
 }
 
+#if DEBUG
 #Preview {
-    let mockObs = ObservabilityManager()
-    let mockErrorHandler = ErrorHandler(observability: mockObs)
+    let deps = PreviewSupport.makeAppDependencies()
     
     LoginView(
-        viewModel: LoginViewModel(authService: MockAuthService(), observability: mockObs)
+        viewModel: LoginViewModel(
+            authService: deps.authService,
+            observability: deps.observability
+        )
     )
-    .environmentObject(ErrorPresenter(errorHandler: mockErrorHandler))
+    .environmentObject(ErrorPresenter(errorHandler: deps.errorHandler))
 }
+#endif

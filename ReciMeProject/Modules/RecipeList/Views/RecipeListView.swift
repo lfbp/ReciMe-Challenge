@@ -97,3 +97,21 @@ struct RecipeListView: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Recipe List") {
+    NavigationStack {
+        RecipeListView(viewModel: PreviewSupport.makeRecipeListViewModel())
+    }
+}
+
+#Preview("Recipe List — Empty") {
+    NavigationStack {
+        RecipeListView(
+            viewModel: PreviewSupport.makeRecipeListViewModel(
+                recipeService: PreviewSupport.makeStaticRecipeService(recipes: [])
+            )
+        )
+    }
+}
+#endif

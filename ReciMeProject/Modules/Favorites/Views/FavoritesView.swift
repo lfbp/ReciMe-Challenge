@@ -48,3 +48,26 @@ struct FavoritesView: View {
         .background(ColorTokens.background)
     }
 }
+
+#if DEBUG
+#Preview("Favorites — Empty") {
+    NavigationStack {
+        FavoritesView(viewModel: PreviewSupport.makeFavoritesViewModel())
+    }
+}
+
+#Preview("Favorites — Populated") {
+    let favoritesService = FavoritesService()
+    favoritesService.toggleFavorite(Recipe.preview.id)
+    favoritesService.toggleFavorite(Recipe.previewAlt.id)
+    
+    return NavigationStack {
+        FavoritesView(
+            viewModel: PreviewSupport.makeFavoritesViewModel(
+                recipeService: PreviewSupport.makeStaticRecipeService(),
+                favoritesService: favoritesService
+            )
+        )
+    }
+}
+#endif

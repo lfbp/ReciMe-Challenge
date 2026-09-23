@@ -31,3 +31,14 @@ final class AppDependencies {
 }
 
 extension AppDependencies: LoginDependencies, HomeTabDependencies {}
+
+extension AppDependencies {
+    /// Narrow view for the login flow (auth + observability only).
+    var login: LoginDependencies { self }
+    
+    /// Narrow view for the Recipes tab.
+    var recipeList: RecipeListDependencies { self }
+    
+    /// Narrow view for the Favorites tab.
+    var favorites: FavoritesDependencies { self }
+}

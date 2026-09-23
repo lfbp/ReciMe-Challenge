@@ -31,7 +31,7 @@ final class AppCoordinator: ObservableObject, ParentCoordinator {
     private func showLogin() {
         clearMainTabs()
         
-        let loginCoordinator = LoginCoordinator(dependencies: appDependencies)
+        let loginCoordinator = LoginCoordinator(dependencies: appDependencies.login)
         loginCoordinator.onLoginSuccess = { [weak self] user in
             self?.showMainTab(user: user)
         }
@@ -48,11 +48,11 @@ final class AppCoordinator: ObservableObject, ParentCoordinator {
             self.loginCoordinator = nil
         }
         
-        let recipeListCoordinator = RecipeListCoordinator(dependencies: appDependencies)
+        let recipeListCoordinator = RecipeListCoordinator(dependencies: appDependencies.recipeList)
         recipeListCoordinator.start()
         addChild(recipeListCoordinator)
         
-        let favoritesCoordinator = FavoritesCoordinator(dependencies: appDependencies)
+        let favoritesCoordinator = FavoritesCoordinator(dependencies: appDependencies.favorites)
         favoritesCoordinator.start()
         addChild(favoritesCoordinator)
         

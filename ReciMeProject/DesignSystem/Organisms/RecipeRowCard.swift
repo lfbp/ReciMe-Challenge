@@ -66,3 +66,24 @@ struct RecipeRowCard: View {
         .buttonStyle(.plain)
     }
 }
+
+#if DEBUG
+#Preview("Recipe Row") {
+    VStack(spacing: SpacingTokens.md) {
+        RecipeRowCard(
+            recipe: .preview,
+            isFavorite: false,
+            onTap: {},
+            onFavoriteToggle: {}
+        )
+        RecipeRowCard(
+            recipe: .previewAlt,
+            isFavorite: true,
+            onTap: {},
+            onFavoriteToggle: {}
+        )
+    }
+    .padding()
+    .background(ColorTokens.background)
+}
+#endif
